@@ -106,7 +106,7 @@ public class UserController {
                 throw new IOException("Image is outside the image directory");
             }
             
-            final ByteArrayResource inputStream = new ByteArrayResource(fileCache.getFileBytes(imageFile));
+            final ByteArrayResource inputStream = new ByteArrayResource(fileCache.getFileBytes(image.toString()));
             return ResponseEntity.status(HttpStatus.OK).contentLength(inputStream.contentLength()).body(inputStream);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
