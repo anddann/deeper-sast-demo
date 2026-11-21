@@ -96,6 +96,14 @@ public class UserController {
                     break;
             }
             String imageFile = FileUtils.getInstance().getUserImagePath(request.getRemoteUser()) + extension;
+
+             // do security check avoiding path traversal
+            File file = new File(imageFile);
+    
+            if (!file.toPath().normalize().startsWith(FileUtils.getImagePath())) {
+                throw new IOException("Entry is outside of the target directory");
+            }
+            
             final ByteArrayResource inputStream = new ByteArrayResource(fileCache.getFileBytes(imageFile));
             return ResponseEntity.status(HttpStatus.OK).contentLength(inputStream.contentLength()).body(inputStream);
         } catch (Exception e) {
