@@ -1,4 +1,4 @@
-# deeper-sast-demo
+# deeper-sast-demo - trigger
 
 The goal of this demo is to show the Sonar deeper SAST capabilities of the Java engine. We want to highlight that the usage of external libraries can introduce severe security vulnerabilities, which can be detected by Sonar deeper SAST.
 
