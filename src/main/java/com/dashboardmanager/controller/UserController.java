@@ -98,10 +98,12 @@ public class UserController {
             String imageFile = FileUtils.getInstance().getUserImagePath(request.getRemoteUser()) + extension;
 
              // do security check avoiding path traversal
-            File file = new File(imageFile);
+            FileUtils fileUtils = FileUtils.getInstance();
+            Path imageRoot = Path.of(fileUtils.getImagePath()).toRealPath();
+            Path image = Path.of(imageFile).toRealPath();
     
-            if (!file.toPath().normalize().startsWith(FileUtils.getImagePath())) {
-                throw new IOException("Entry is outside of the target directory");
+            if (!image.startsWith(imageRoot)) {
+                throw new IOException("Image is outside the image directory");
             }
             
             final ByteArrayResource inputStream = new ByteArrayResource(fileCache.getFileBytes(imageFile));
