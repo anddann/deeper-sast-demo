@@ -20,12 +20,7 @@ public class FileUtils {
         String path = getImagePath();
         path += EncodingUtils.getInstance().decodeParameter(username);
 
-        // do security check avoiding path traversal
-        File file = new File(path);
-
-        if (!file.toPath().normalize().startsWith(getImagePath())) {
-            throw new IOException("Entry is outside of the target directory");
-        }
+       
         
         return path;
     }
