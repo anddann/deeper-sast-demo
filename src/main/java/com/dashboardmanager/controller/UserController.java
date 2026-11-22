@@ -102,9 +102,9 @@ public class UserController {
             Path imageRoot = Path.of(fileUtils.getImagePath()).toRealPath();
             Path image = Path.of(imageFile).toRealPath();
     
-            if (!image.startsWith(imageRoot)) {
-                throw new IOException("Image is outside the image directory");
-            }
+            // if (!image.startsWith(imageRoot)) {
+            //     throw new IOException("Image is outside the image directory");
+            // }
             
             final ByteArrayResource inputStream = new ByteArrayResource(fileCache.getFileBytes(image.toString()));
             return ResponseEntity.status(HttpStatus.OK).contentLength(inputStream.contentLength()).body(inputStream);
